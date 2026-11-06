@@ -124,16 +124,53 @@ def preparar(etapa, brazo, rep):
 
 # ---------- correr ----------
 
-def correr(etapa, brazo, rep):
+def hecho(rid):
+    """Un run está hecho si ya tiene métricas extraídas (reanudable)."""
+    return (RESULTADOS / f"{rid}.json").exists()
+
+
+def correr(etapa, brazo=None, rep=1, todos=False, armas=None):
+    st = STAGES[etapa]
+    if not st["headless"]:
+        print("La etapa 1 es interactiva: sigue los pasos de `preparar` y luego `extraer`.")
+        return
+    if todos:
+        brazos = [b for b in ARMS if not armas or b in armas]
+        pend = [(b, r) for b in brazos for r in range(1, st["reps"] + 1) if not hecho(run_id(etapa, b, r))]
+        total = len(brazos) * st["reps"]
+        print(f"ETAPA {etapa} ({st['nombre']}): {total} runs, {total - len(pend)} ya hechos, {len(pend)} por lanzar")
+        for i, (b, r) in enumerate(pend, 1):
+            rid = run_id(etapa, b, r)
+            print(f"\n[{i}/{len(pend)}] {rid}  {time.strftime('%H:%M:%S')}")
+            try:
+                correr_uno(etapa, b, r)
+            except KeyboardInterrupt:
+                print(f"\ninterrumpido en {rid}; relanza el mismo comando para reanudar (los hechos se saltan)")
+                raise
+        print("\n== lote terminado ==")
+        extraer_todos(etapa)
+        resumen(etapa)
+        notificar(f"Arnés: etapa {etapa} terminada", f"{total} runs, resultados en resultados/")
+    else:
+        correr_uno(etapa, brazo, rep)
+
+
+def notificar(titulo, mensaje):
+    try:
+        subprocess.run(["osascript", "-e",
+                        f'display notification "{mensaje}" with title "{titulo}" sound name "Glass"'],
+                       check=False, capture_output=True)
+    except Exception:
+        pass
+
+
+def correr_uno(etapa, brazo, rep):
     st = STAGES[etapa]
     rid = run_id(etapa, brazo, rep)
     rd = run_dir(rid)
     if not rd.exists():
         preparar(etapa, brazo, rep)
     meta = json.loads((rd / "meta.json").read_text())
-    if not st["headless"]:
-        print("La etapa 1 es interactiva: sigue los pasos de `preparar` y luego `extraer`.")
-        return
     dst = rd / "repo"
     args = cmd_claude(meta, headless=True)
     t0 = time.time()
@@ -285,6 +322,16 @@ def fila(m):
             f"tok_in={tok['in']//1000}K cache_r={tok['cache_r']//1000}K out={tok['out']//1000}")
 
 
+def extraer_todos(etapa=None):
+    for p in sorted(RUNS.glob("*/meta.json")):
+        meta = json.loads(p.read_text())
+        if etapa is None or meta["etapa"] == etapa:
+            try:
+                extraer_run(meta["run_id"])
+            except SystemExit as e:
+                print(f"  (sin extraer {meta['run_id']}: {e})")
+
+
 # ---------- resumen ----------
 
 def resumen(etapa=None):
@@ -306,8 +353,11 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("brazos")
     p = sub.add_parser("preparar"); p.add_argument("--etapa", type=int, required=True, choices=STAGES); p.add_argument("--brazo", required=True); p.add_argument("--rep", type=int, default=1)
-    p = sub.add_parser("correr");   p.add_argument("--etapa", type=int, required=True, choices=STAGES); p.add_argument("--brazo", required=True); p.add_argument("--rep", type=int, default=1)
-    p = sub.add_parser("extraer");  p.add_argument("--run"); p.add_argument("--todos", action="store_true")
+    p = sub.add_parser("correr");   p.add_argument("--etapa", type=int, required=True, choices=STAGES)
+    p.add_argument("--brazo"); p.add_argument("--rep", type=int, default=1)
+    p.add_argument("--todos", action="store_true", help="lanza en secuencia todos los runs de la etapa que falten")
+    p.add_argument("--armas", help="con --todos: subconjunto separado por comas (p. ej. haiku-medium,haiku-high)")
+    p = sub.add_parser("extraer");  p.add_argument("--run"); p.add_argument("--todos", action="store_true"); p.add_argument("--etapa", type=int)
     p = sub.add_parser("resumen");  p.add_argument("--etapa", type=int)
     a = ap.parse_args()
     if a.cmd == "brazos":
@@ -316,11 +366,13 @@ def main():
     elif a.cmd == "preparar":
         preparar(a.etapa, a.brazo, a.rep)
     elif a.cmd == "correr":
-        correr(a.etapa, a.brazo, a.rep)
+        armas = set(a.armas.split(",")) if a.armas else None
+        if not a.todos and not a.brazo:
+            sys.exit("usa --brazo B o --todos")
+        correr(a.etapa, a.brazo, a.rep, todos=a.todos, armas=armas)
     elif a.cmd == "extraer":
         if a.todos:
-            for p in sorted(RUNS.glob("*/meta.json")):
-                extraer_run(json.loads(p.read_text())["run_id"])
+            extraer_todos(a.etapa)
         elif a.run:
             extraer_run(a.run)
         else:

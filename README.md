@@ -37,17 +37,42 @@ no se le llevan las etapas 2 y 3.
 
 ```bash
 python3 arnes.py brazos                                   # lista los brazos
-python3 arnes.py correr --etapa 0 --brazo sonnet-low      # prepara + lanza + extrae
+python3 arnes.py correr --etapa 0 --brazo sonnet-low      # prepara + lanza + extrae un run
 python3 arnes.py preparar --etapa 1 --brazo haiku-high    # etapa 1: imprime los pasos interactivos
 python3 arnes.py extraer --todos                          # transcript -> resultados/*.json
 python3 arnes.py resumen                                  # tabla agregada
 ```
 
+### Lote completo de una etapa (lo normal)
+
+```bash
+# lanza en secuencia todos los runs que falten de la etapa, uno por brazo y rep;
+# al terminar cada run extrae sus métricas, y al final imprime el resumen y
+# manda una notificación de macOS. Reanudable: los runs con resultado se saltan.
+python3 arnes.py correr --etapa 2 --todos
+
+# solo algunos brazos:
+python3 arnes.py correr --etapa 2 --todos --armas haiku-medium,haiku-high
+```
+
+Para no depender de la terminal abierta ni de que el Mac se duela:
+
+```bash
+nohup caffeinate -is python3 arnes.py correr --etapa 2 --todos > runs/campana-e2.log 2>&1 &
+tail -f runs/campana-e2.log      # progreso; Ctrl+C aquí solo suelta el tail
+```
+
+Un run que muere a mitad (Ctrl+C, apagón) se repite borrando su carpeta:
+`rm -rf runs/<id>` y relanzar el lote — los hechos se saltan. La etapa 1 sigue
+siendo interactiva a mano (su valor es la respuesta humana, la misma en los 4
+brazos).
+
 Cada run vive en `runs/<etapa>-<brazo>-r<rep>/` con un clon fresco del seed
 (`repo/`, git init + commit seed), `meta.json`, `salida.txt`, `comando.txt` y
 `debug.log`. Los transcripts se buscan en
 `~/.claude/projects/<ruta-del-run-codificada>/` (método del reporte
-2026-09-24 §6.3).
+2026-09-24 §6.3); el extractor distingue el transcript del orquestador (abre
+con `/tasky`) de los de los subagentes que salen por `claude-run`.
 
 ## Métricas por run (`resultados/<run>.json`)
 

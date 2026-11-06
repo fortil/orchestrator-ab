@@ -297,7 +297,7 @@ def extraer_run(rid):
         # bypass: terminó sin pasar por el pipeline (sin rutas y sin subagentes);
         # el revisor lo confirma con linea_final ("hice el trabajo directamente...")
         "bypass": (finish is not None and not route_lines
-                   and not any(k.lower() == "agent" for k in sesion_tool_use)),
+                   and not any(k.lower() == "agent" for k in ses_tools)),
         "linea_final": finish, "decisiones": decisions,
         "errores": len(errors), "errores_sin_respaldo": sum(1 for e in errors if not e["respaldado"]),
         "errores_txt": [e["texto"] for e in errors][:5],

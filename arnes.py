@@ -26,7 +26,10 @@ reporte 2026-09-24 §6.3). El debug log de cada run queda en runs/<id>/debug.log
 (lleva reglas allow con credenciales: NO pegarlo nunca; extraer solo lee la
 línea de modo).
 """
-import argparse, json, os, pathlib, re, shutil, subprocess, sys, time
+import argparse, functools, json, os, pathlib, re, shutil, subprocess, sys, time
+
+# el lote corre con stdout redirigido a archivo: sin flush el log parece muerto
+print = functools.partial(print, flush=True)
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SEED = ROOT / "seed"
@@ -288,6 +291,10 @@ def extraer_run(rid):
     writes_sospechosas = [w for w in ses_writes if not DOC_RE.match(str(pathlib.PurePosixPath(w.replace("\\", "/")).name)) and ".tasky/" not in w]
     m.update({
         "fin": (finish.split("—")[0].strip() if finish else ("DECISION" if decisions and not finish else "sin-linea")),
+        # bypass: terminó sin pasar por el pipeline (sin rutas y sin subagentes);
+        # el revisor lo confirma con linea_final ("hice el trabajo directamente...")
+        "bypass": (finish is not None and not route_lines
+                   and not any(k.lower() == "agent" for k in sesion_tool_use)),
         "linea_final": finish, "decisiones": decisions,
         "errores": len(errors), "errores_sin_respaldo": sum(1 for e in errors if not e["respaldado"]),
         "errores_txt": [e["texto"] for e in errors][:5],

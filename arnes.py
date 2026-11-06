@@ -153,16 +153,32 @@ def transcript_dir(rd):
     return PROJECTS / absrepo.replace("/", "-")
 
 
+def find_transcript(rd):
+    """El transcript del orquestador: el que abre con /tasky. El mismo dir
+    recibe también los transcripts de los subagentes (claude-run), que abren
+    con 'TASK: ...' y no llevan el marcador del comando."""
+    d = transcript_dir(rd)
+    if not d.exists():
+        return None
+    for f in sorted(d.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True):
+        try:
+            with open(f) as fh:
+                head = fh.read(200_000)
+            if "/tasky" in head:
+                return f
+        except OSError:
+            continue
+    return None
+
+
 def extraer_run(rid):
     rd = run_dir(rid)
     if not (rd / "meta.json").exists():
         sys.exit(f"no existe runs/{rid}/meta.json")
     meta = json.loads((rd / "meta.json").read_text())
-    tdir = transcript_dir(rd)
-    files = sorted(tdir.glob("*.jsonl"), key=lambda p: p.stat().st_mtime) if tdir.exists() else []
-    if not files:
-        sys.exit(f"sin transcript para {rid} en {tdir}")
-    tx = files[-1]
+    tx = find_transcript(rd)
+    if not tx:
+        sys.exit(f"sin transcript de orquestador para {rid} en {transcript_dir(rd)}")
     eventos = []
     for line in tx.read_text().splitlines():
         try:

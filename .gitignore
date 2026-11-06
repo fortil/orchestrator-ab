@@ -1,0 +1,4 @@
+runs/
+resultados/
+__pycache__/
+*.log

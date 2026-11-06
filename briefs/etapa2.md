@@ -1,0 +1,1 @@
+Añade al CLI un subcomando `stats` que reciba la ruta de un archivo de texto e imprima tres líneas: líneas, palabras y caracteres. Debe manejar archivo vacío, una sola línea y texto con acentos y emojis. Añade pruebas pytest para los tres casos y deja las pruebas en verde.

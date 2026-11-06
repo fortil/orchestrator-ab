@@ -1,0 +1,3 @@
+La inferencia local no compite con la nube: compite con la espera.
+Un modelo en tu propio NVMe responde sin red, sin cuota y sin historial ajeno.
+El truco no es la velocidad punta; es que nunca se apaga.

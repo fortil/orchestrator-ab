@@ -43,6 +43,9 @@ ARMS = {
     "sonnet-low":    {"model": "claude-sonnet-5-5", "effort": "low"},
     "haiku-medium":  {"model": "claude-haiku-5-5",  "effort": "medium"},
     "haiku-high":    {"model": "claude-haiku-5-5",  "effort": "high"},
+    # segunda ola (2026-11-06, pedido de William): Opus a efforts baratos
+    "opus-low":      {"model": "claude-opus-5-5",   "effort": "low"},
+    "opus-medium":   {"model": "claude-opus-5-5",   "effort": "medium"},
 }
 STAGES = {
     0: {"nombre": "smoke",     "mode": "xs", "brief": "etapa0.md", "reps": 1, "headless": True},

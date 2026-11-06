@@ -6,7 +6,7 @@ orquestador, y en qué effort? Los subagentes salen por `tasky-route` con
 modelo y effort de la cascada, así que la única variable entre brazos es la
 sesión que recibe `/tasky`: su modelo y su effort.
 
-## Brazos (los 4 escenarios)
+## Brazos
 
 | Brazo | Modelo de la sesión | Effort |
 |---|---|---|
@@ -14,6 +14,11 @@ sesión que recibe `/tasky`: su modelo y su effort.
 | `sonnet-low` | claude-sonnet-5-5 | low |
 | `haiku-medium` | claude-haiku-5-5 | medium |
 | `haiku-high` | claude-haiku-5-5 | high |
+| `opus-low` | claude-opus-5-5 | low |
+| `opus-medium` | claude-opus-5-5 | medium |
+
+Los brazos opus son la segunda ola (2026-11-06): la pregunta de William es si
+Opus a effort barato orquesta mejor por token que Sonnet y Haiku.
 
 La silla documentada de tasky es Sonnet 5.5 a high; el uso habitual de William
 es medium/low. La pregunta del experimento no es "¿Sonnet high vs Haiku?",

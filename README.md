@@ -46,7 +46,6 @@ For every run (one fresh seed repo per run):
 | `opus-low` | claude-opus-5-5 | low |
 | `opus-medium` | claude-opus-5-5 | medium |
 | `sonnet-high` | claude-sonnet-5-5 | high |
-| `haiku-low` | claude-haiku-5-5 | low |
 
 The subagents are launched per role with explicit model and effort by the
 pipeline's own router, so the only variable between arms is the model and

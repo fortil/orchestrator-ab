@@ -36,7 +36,11 @@ SEED = ROOT / "seed"
 RUNS = ROOT / "runs"
 RESULTADOS = ROOT / "resultados"
 BRIEFS = ROOT / "briefs"
-PROJECTS = pathlib.Path.home() / ".claude" / "projects"
+# el binario y el dir de transcripts son configurables para poder correr contra
+# otra cuenta (p. ej. claude-cowork): ARNES_CLAUDE_BIN y ARNES_PROJECTS_DIR
+CLAUDE_BIN = os.environ.get("ARNES_CLAUDE_BIN", "claude")
+PROJECTS = pathlib.Path(os.environ.get("ARNES_PROJECTS_DIR",
+                                       pathlib.Path.home() / ".claude" / "projects"))
 
 ARMS = {
     "sonnet-medium": {"model": "claude-sonnet-5-5", "effort": "medium"},
@@ -84,7 +88,7 @@ def prompt_for(etapa, brazo, rep):
 
 
 def cmd_claude(meta, headless=True):
-    args = ["claude"]
+    args = [CLAUDE_BIN]
     if headless:
         args += ["-p", meta["prompt"]]
     args += ["--model", meta["model"], "--effort", meta["effort"],
@@ -189,7 +193,7 @@ def correr_uno(etapa, brazo, rep):
     dst = rd / "repo"
     if etapa == 1:
         return correr_etapa1_auto(rid, rd, meta, dst)
-    args = cmd_claude(meta, headless=True)
+    args = cmd_claude(meta, headless=True)  # usa CLAUDE_BIN
     t0 = time.time()
     print(f"lanzando {rid}: {' '.join(args[:4])} ...")
     p = subprocess.run(args, cwd=dst, capture_output=True, text=True)
@@ -207,7 +211,7 @@ def correr_etapa1_auto(rid, rd, meta, dst):
     """Etapa 1 sin humano: sesión multi-turno por stream-json; cuando el
     orquestador emite la DECISION del archivo ajeno, el arnés responde con la
     misma decisión fija que se dio a mano en las olas 1 y 2."""
-    args = ["claude", "-p", "--verbose",
+    args = [CLAUDE_BIN, "-p", "--verbose",
             "--input-format", "stream-json", "--output-format", "stream-json",
             "--model", meta["model"], "--effort", meta["effort"],
             "--permission-mode", "auto",

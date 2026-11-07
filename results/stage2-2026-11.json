@@ -5,7 +5,7 @@
   "2.1.317",
   "2.1.318"
  ],
- "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
+ "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (all 18 runs valid; the one killed by the weekly limit was re-run after the Nov 8 reset) (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
  "runs": [
   {
    "run_id": "e2-sonnet-medium-r1",
@@ -556,8 +556,29 @@
    "brazo": "opus-medium",
    "etapa": 2,
    "rep": 3,
-   "excluded": true,
-   "reason": "killed by weekly usage limit 12 s in (resets Nov 8, 12:00 America/Bogota)"
+   "eventos": 143,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 1,
+   "sesion_tool_use": {
+    "Bash": 17
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 70,
+    "cache_r": 4039945,
+    "cache_w": 473384,
+    "out": 21787
+   },
+   "pico_contexto": 137382,
+   "duracion_s": 2104.4,
+   "bypass_class": "full"
   }
  ]
 }

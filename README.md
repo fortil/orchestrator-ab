@@ -59,15 +59,13 @@ effort of the orchestrating session.
 | 2 | full pipeline: plan, critique, implement, review | m | 3 per arm | headless |
 | 3 | pressure: long run | l | 3 per arm | headless |
 
-## Results from the example run (November 2026, 17 valid runs)
+## Results from the example run (November 2026, 18 runs)
 
-Stage 2 (full pipeline, 3 reps per arm). One run was killed by a weekly usage
-limit 12 seconds in and is excluded.
 
 | Arm | Full pipeline | Partial | Bypass | Seat cache read (range) |
 |---|---|---|---|---|
 | `opus-low` | **3/3** | 0 | 0 | 2.4-3.5M tok |
-| `opus-medium` | **2/2** | 0 | 0 | 2.9-4.0M tok |
+| `opus-medium` | **3/3** | 0 | 0 | 2.9-4.0M tok |
 | `haiku-high` | 3/3 | 0 | 0 | 7.9-9.7M tok |
 | `sonnet-medium` | 2/3 | 0 | 1 (confessed) | 2.4-3.1M tok |
 | `haiku-medium` | 1/3 | 0 | 2 | 1.0-5.1M tok |

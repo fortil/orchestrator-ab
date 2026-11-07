@@ -195,6 +195,10 @@ def correr_uno(etapa, brazo, rep):
     (rd / "salida.txt").write_text(p.stdout + ("\n[stderr]\n" + p.stderr if p.stderr else ""))
     dur = time.time() - t0
     print(f"terminado {rid} en {dur:.0f}s -> runs/{rid}/salida.txt")
+    if re.search(r"hit your weekly limit|usage limit (reached|exceeded)", (p.stdout or "") + (p.stderr or ""), re.I):
+        extraer_run(rid)
+        print(f"{rid}: CUOTA AGOTADA (weekly limit). Detengo el lote; reanuda tras el reset con el mismo comando (los hechos se saltan).")
+        sys.exit(3)
     extraer_run(rid)
 
 

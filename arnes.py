@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Arnés del A/B de orquestadores para tasky (pieza 07 orquestador-haiku-sonnet).
+"""Arnés del A/B de orquestadores para un pipeline agéntico (tasky).
 
 Compara la sesión que recibe /tasky (el orquestador) entre 4 brazos:
 sonnet-medium, sonnet-low, haiku-medium, haiku-high. Los subagentes salen por
@@ -9,7 +9,7 @@ modelo y el effort de la sesión.
 Etapas:
   0  smoke          MODE=xs, headless, 1 rep por brazo. ¿Preflight + línea final?
   1  DECISION       MODE=xs, INTERACTIVO, 1 rep por brazo. Trigger: archivo
-                    ajeno staged (DECISION de tasky.md:1014). Tú respondes.
+                    ajeno staged (the staged-file DECISION). Tú respondes.
   2  run completo   MODE=m,  headless, 3 reps por brazo.
   3  presión        MODE=l,  headless, 3 reps por brazo. Solo si la 2 pasa.
 
@@ -22,7 +22,7 @@ Subcomandos:
   resumen   [--etapa N]                   tabla agregada de resultados/
 
 Transcripts: ~/.claude/projects/<cwd-convertido-a-guiones>/*.jsonl (método del
-reporte 2026-09-24 §6.3). El debug log de cada run queda en runs/<id>/debug.log
+transcript accounting (context per call = input + cache reads + cache writes)). El debug log de cada run queda en runs/<id>/debug.log
 (lleva reglas allow con credenciales: NO pegarlo nunca; extraer solo lee la
 línea de modo).
 """
@@ -43,7 +43,7 @@ ARMS = {
     "sonnet-low":    {"model": "claude-sonnet-5-5", "effort": "low"},
     "haiku-medium":  {"model": "claude-haiku-5-5",  "effort": "medium"},
     "haiku-high":    {"model": "claude-haiku-5-5",  "effort": "high"},
-    # segunda ola (2026-11-06, pedido de William): Opus a efforts baratos
+    # segunda ola (2026-11-06): Opus a efforts baratos
     "opus-low":      {"model": "claude-opus-5-5",   "effort": "low"},
     "opus-medium":   {"model": "claude-opus-5-5",   "effort": "medium"},
 }
@@ -102,7 +102,7 @@ def preparar(etapa, brazo, rep):
     subprocess.run(["git", "add", "-A"], cwd=dst, check=True)
     subprocess.run(["git", "-c", "user.name=arnes", "-c", "user.email=arnes@test",
                     "commit", "-qm", "seed"], cwd=dst, check=True)
-    # etapa 1: archivo ajeno staged, el trigger de la DECISION (tasky.md:1014)
+    # etapa 1: archivo ajeno staged, el trigger DECISION
     if etapa == 1:
         ajeno = dst / "ajeno-otro-proyecto.txt"
         ajeno.write_text("Este archivo viene de otro proyecto y no debe commitearse.\n")

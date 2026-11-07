@@ -1,0 +1,563 @@
+{
+ "experiment": "orchestrator-ab stage 2 (full pipeline, MODE=m, 3 reps per arm)",
+ "date": "2026-11-06/07",
+ "cli_versions": [
+  "2.1.317",
+  "2.1.318"
+ ],
+ "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
+ "runs": [
+  {
+   "run_id": "e2-sonnet-medium-r1",
+   "brazo": "sonnet-medium",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 81,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 5,
+    "bash": 1
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 22,
+    "cache_r": 1074726,
+    "cache_w": 208696,
+    "out": 5672
+   },
+   "pico_contexto": 119938,
+   "duracion_s": 46.5,
+   "bypass_class": "bypass"
+  },
+  {
+   "run_id": "e2-sonnet-medium-r2",
+   "brazo": "sonnet-medium",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 128,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 11
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 44,
+    "cache_r": 2412576,
+    "cache_w": 227986,
+    "out": 13376
+   },
+   "pico_contexto": 126480,
+   "duracion_s": 1150.6,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-medium-r3",
+   "brazo": "sonnet-medium",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 154,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 14
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 54,
+    "cache_r": 3059763,
+    "cache_w": 228864,
+    "out": 11371
+   },
+   "pico_contexto": 129636,
+   "duracion_s": 1805.3,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-low-r1",
+   "brazo": "sonnet-low",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 90,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 1,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 2,
+    "Agent": 1,
+    "ScheduleWakeup": 1
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 26,
+    "cache_r": 1077789,
+    "cache_w": 360073,
+    "out": 4452
+   },
+   "pico_contexto": 193284,
+   "duracion_s": 1230.5,
+   "bypass_class": "partial"
+  },
+  {
+   "run_id": "e2-sonnet-low-r2",
+   "brazo": "sonnet-low",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 65,
+   "fin": "sin-linea",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 1,
+   "sesion_tool_use": {
+    "Bash": 3,
+    "bash": 1
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 14,
+    "cache_r": 600527,
+    "cache_w": 206658,
+    "out": 3962
+   },
+   "pico_contexto": 118874,
+   "duracion_s": 24.9,
+   "bypass_class": "bypass"
+  },
+  {
+   "run_id": "e2-sonnet-low-r3",
+   "brazo": "sonnet-low",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 161,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 1,
+   "sesion_tool_use": {
+    "Bash": 15
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 1,
+   "tokens": {
+    "in": 58,
+    "cache_r": 3490375,
+    "cache_w": 256198,
+    "out": 13829
+   },
+   "pico_contexto": 139320,
+   "duracion_s": 1921.3,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-medium-r1",
+   "brazo": "haiku-medium",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 94,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 4,
+    "Edit": 2
+   },
+   "sesion_writes": [
+    "demo_cli.py",
+    "test_demo_cli.py"
+   ],
+   "writes_sospechosas": [
+    "demo_cli.py",
+    "test_demo_cli.py"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 20,
+    "cache_r": 977179,
+    "cache_w": 212613,
+    "out": 12213
+   },
+   "pico_contexto": 123901,
+   "duracion_s": 44.1,
+   "bypass_class": "bypass"
+  },
+  {
+   "run_id": "e2-haiku-medium-r2",
+   "brazo": "haiku-medium",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 85,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 4,
+    "Edit": 1
+   },
+   "sesion_writes": [
+    "demo_cli.py"
+   ],
+   "writes_sospechosas": [
+    "demo_cli.py"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 20,
+    "cache_r": 966826,
+    "cache_w": 219413,
+    "out": 7636
+   },
+   "pico_contexto": 122779,
+   "duracion_s": 27.4,
+   "bypass_class": "bypass"
+  },
+  {
+   "run_id": "e2-haiku-medium-r3",
+   "brazo": "haiku-medium",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 257,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Skill": 1,
+    "Bash": 19,
+    "Write": 2
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 84,
+    "cache_r": 5101186,
+    "cache_w": 252794,
+    "out": 33883
+   },
+   "pico_contexto": 138679,
+   "duracion_s": 1851.8,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-high-r1",
+   "brazo": "haiku-high",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 326,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 28,
+    "Write": 2
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 114,
+    "cache_r": 7890269,
+    "cache_w": 307591,
+    "out": 80826
+   },
+   "pico_contexto": 165884,
+   "duracion_s": 2774.0,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-high-r2",
+   "brazo": "haiku-high",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 387,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 32,
+    "Write": 2,
+    "Read": 1
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "route_lines": 1,
+   "denegados": 0,
+   "tokens": {
+    "in": 128,
+    "cache_r": 8783125,
+    "cache_w": 297272,
+    "out": 56396
+   },
+   "pico_contexto": 165383,
+   "duracion_s": 2919.0,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-high-r3",
+   "brazo": "haiku-high",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 510,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 46,
+    "Write": 3
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md",
+    "DIRT.snapshot"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md",
+    "DIRT.snapshot"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 142,
+    "cache_r": 9713165,
+    "cache_w": 394979,
+    "out": 63389
+   },
+   "pico_contexto": 168378,
+   "duracion_s": 2216.1,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-opus-low-r1",
+   "brazo": "opus-low",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 108,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 2,
+   "sesion_tool_use": {
+    "Bash": 10
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 42,
+    "cache_r": 2426900,
+    "cache_w": 246282,
+    "out": 19155
+   },
+   "pico_contexto": 137312,
+   "duracion_s": 1522.2,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-opus-low-r2",
+   "brazo": "opus-low",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 120,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 13
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 48,
+    "cache_r": 2765382,
+    "cache_w": 239027,
+    "out": 19211
+   },
+   "pico_contexto": 134070,
+   "duracion_s": 1817.6,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-opus-low-r3",
+   "brazo": "opus-low",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 148,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 2,
+   "sesion_tool_use": {
+    "Bash": 13,
+    "ToolSearch": 1,
+    "Skill": 1
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 1,
+   "denegados": 0,
+   "tokens": {
+    "in": 60,
+    "cache_r": 3549393,
+    "cache_w": 278903,
+    "out": 24678
+   },
+   "pico_contexto": 141473,
+   "duracion_s": 2212.0,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-opus-medium-r1",
+   "brazo": "opus-medium",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 113,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 2,
+   "sesion_tool_use": {
+    "Bash": 12
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 1,
+   "tokens": {
+    "in": 50,
+    "cache_r": 2856312,
+    "cache_w": 242092,
+    "out": 24560
+   },
+   "pico_contexto": 133459,
+   "duracion_s": 1183.9,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-opus-medium-r2",
+   "brazo": "opus-medium",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 138,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 15,
+    "Read": 1
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 66,
+    "cache_r": 4046697,
+    "cache_w": 261380,
+    "out": 28832
+   },
+   "pico_contexto": 141539,
+   "duracion_s": 1291.0,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-opus-medium-r3",
+   "brazo": "opus-medium",
+   "etapa": 2,
+   "rep": 3,
+   "excluded": true,
+   "reason": "killed by weekly usage limit 12 s in (resets Nov 8, 12:00 America/Bogota)"
+  }
+ ]
+}

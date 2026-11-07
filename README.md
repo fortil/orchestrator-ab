@@ -79,7 +79,10 @@ Findings:
   emitting its finish line.
 - **The best orchestrator measured was Opus at low effort**: every valid run
   completed the full pipeline, silent and clean, at roughly a third of the seat
-  cost of the only other fully disciplined arm (Haiku at high).
+  tokens of the only other fully disciplined arm (Haiku at high). In API
+  dollars that flips: Haiku's cache reads bill at $0.05/MTok versus Opus's
+  $0.20, so Haiku high's seat came out about three times cheaper per run
+  despite the triple token count.
 - **When models bypass the pipeline, they do it differently.** Haiku kept
   branch and commit discipline while bypassing; Sonnet once left uncommitted
   changes on the default branch and once skipped the finish line entirely.

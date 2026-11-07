@@ -134,9 +134,9 @@ add a line per model+effort you want to test.
   (stage 3 exists for that).
 - Raw token counts are not dollars. Cache reads bill at different rates per
   model family.
-- Weekly usage limits can kill a run mid-batch. One of the published runs died
-  12 seconds in and is excluded; the batch is resumable and finished runs are
-  skipped.
+- Weekly usage limits can kill a run mid-batch. One of the example runs died
+  12 seconds in; the batch is resumable, finished runs are skipped, and that
+  run was re-executed after the limit reset.
 - The `debug.log` of each run carries permission rules with credentials. It
   stays inside the gitignored `runs/` directory and must never be committed or
   pasted.

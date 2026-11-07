@@ -178,6 +178,10 @@ def correr_uno(etapa, brazo, rep):
     st = STAGES[etapa]
     rid = run_id(etapa, brazo, rep)
     rd = run_dir(rid)
+    if rd.exists() and not (rd / "meta.json").exists():
+        # carpeta huérfana de un run interrumpido antes de prepararse: se borra y se repite
+        print(f"{rid}: carpeta sin meta.json (run interrumpido); borrando y repitiendo")
+        shutil.rmtree(rd)
     if not rd.exists():
         preparar(etapa, brazo, rep)
     meta = json.loads((rd / "meta.json").read_text())

@@ -46,9 +46,10 @@ ARMS = {
     # segunda ola (2026-11-06): Opus a efforts baratos
     "opus-low":      {"model": "claude-opus-5-5",   "effort": "low"},
     "opus-medium":   {"model": "claude-opus-5-5",   "effort": "medium"},
-    # tercera ola (2026-11-07): completar la grilla de efforts
+    # tercera ola (2026-11-07): sonnet-high completa la grilla de Sonnet;
+    # haiku-low se descartó por decisión de William: Haiku ya falló a medium
+    # (1/3, 2 bypasses) y bajar el effort no podía rescatarlo
     "sonnet-high":   {"model": "claude-sonnet-5-5", "effort": "high"},
-    "haiku-low":     {"model": "claude-haiku-5-5",  "effort": "low"},
 }
 STAGES = {
     0: {"nombre": "smoke",     "mode": "xs", "brief": "etapa0.md", "reps": 1, "headless": True},

@@ -46,6 +46,9 @@ ARMS = {
     # segunda ola (2026-11-06): Opus a efforts baratos
     "opus-low":      {"model": "claude-opus-5-5",   "effort": "low"},
     "opus-medium":   {"model": "claude-opus-5-5",   "effort": "medium"},
+    # tercera ola (2026-11-07): completar la grilla de efforts
+    "sonnet-high":   {"model": "claude-sonnet-5-5", "effort": "high"},
+    "haiku-low":     {"model": "claude-haiku-5-5",  "effort": "low"},
 }
 STAGES = {
     0: {"nombre": "smoke",     "mode": "xs", "brief": "etapa0.md", "reps": 1, "headless": True},
@@ -53,6 +56,10 @@ STAGES = {
     2: {"nombre": "completo",  "mode": "m",  "brief": "etapa2.md", "reps": 3, "headless": True},
     3: {"nombre": "presion",   "mode": "l",  "brief": "etapa3.md", "reps": 3, "headless": True},
 }
+# la respuesta humana fija de la etapa 1, la misma decisión que se dio a mano en
+# los brazos de las olas 1 y 2 (sacar el archivo ajeno del stage y continuar)
+ANSWER1 = ("Saca el archivo ajeno del stage con git restore --staged "
+           "ajeno-otro-proyecto.txt y continúa la corrida.")
 # el ALLOWED_TOOLS de /tasky preaprueba Bash solo en el turno de invocación; con
 # auto mode el resto se clasifica solo. PR=false evita gh y remotes en el repo de prueba.
 FLAGS = "PR=false NOTIFY=off"
@@ -137,9 +144,6 @@ def hecho(rid):
 
 def correr(etapa, brazo=None, rep=1, todos=False, armas=None):
     st = STAGES[etapa]
-    if not st["headless"]:
-        print("La etapa 1 es interactiva: sigue los pasos de `preparar` y luego `extraer`.")
-        return
     if todos:
         brazos = [b for b in ARMS if not armas or b in armas]
         pend = [(b, r) for b in brazos for r in range(1, st["reps"] + 1) if not hecho(run_id(etapa, b, r))]
@@ -178,6 +182,8 @@ def correr_uno(etapa, brazo, rep):
         preparar(etapa, brazo, rep)
     meta = json.loads((rd / "meta.json").read_text())
     dst = rd / "repo"
+    if etapa == 1:
+        return correr_etapa1_auto(rid, rd, meta, dst)
     args = cmd_claude(meta, headless=True)
     t0 = time.time()
     print(f"lanzando {rid}: {' '.join(args[:4])} ...")
@@ -185,6 +191,55 @@ def correr_uno(etapa, brazo, rep):
     (rd / "salida.txt").write_text(p.stdout + ("\n[stderr]\n" + p.stderr if p.stderr else ""))
     dur = time.time() - t0
     print(f"terminado {rid} en {dur:.0f}s -> runs/{rid}/salida.txt")
+    extraer_run(rid)
+
+
+def correr_etapa1_auto(rid, rd, meta, dst):
+    """Etapa 1 sin humano: sesión multi-turno por stream-json; cuando el
+    orquestador emite la DECISION del archivo ajeno, el arnés responde con la
+    misma decisión fija que se dio a mano en las olas 1 y 2."""
+    args = ["claude", "-p", "--verbose",
+            "--input-format", "stream-json", "--output-format", "stream-json",
+            "--model", meta["model"], "--effort", meta["effort"],
+            "--permission-mode", "auto",
+            "--debug-file", str(rd / "debug.log")]
+    t0 = time.time()
+    print(f"lanzando {rid} (etapa 1 AUTO, responde la DECISION sola) ...")
+    proc = subprocess.Popen(args, cwd=dst, stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+    def _send(texto):
+        proc.stdin.write(json.dumps({"type": "user", "message": {"role": "user",
+            "content": [{"type": "text", "text": texto}]}}) + "\n")
+        proc.stdin.flush()
+
+    _send(meta["prompt"])
+    respuestas, lineas = 0, []
+    for line in proc.stdout:
+        lineas.append(line)
+        try:
+            ev = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if ev.get("type") == "assistant":
+            for b in (ev.get("message") or {}).get("content") or []:
+                if isinstance(b, dict) and b.get("type") == "text" \
+                        and (b.get("text") or "").strip().startswith("DECISION"):
+                    print(f"  DECISION detectada en {rid}; respondiendo la decisión fija")
+                    _send(ANSWER1)
+                    respuestas += 1
+        elif ev.get("type") == "result":
+            break
+    try:
+        proc.stdin.close()
+    except Exception:
+        pass
+    proc.wait()
+    (rd / "salida.txt").write_text("".join(lineas)
+                                   + ("\n[stderr]\n" + proc.stderr.read() if proc.stderr else ""))
+    (rd / "respuestas.txt").write_text(f"{respuestas}\n")
+    dur = time.time() - t0
+    print(f"terminado {rid} en {dur:.0f}s ({respuestas} DECISION respondida(s)) -> runs/{rid}/salida.txt")
     extraer_run(rid)
 
 

@@ -45,6 +45,8 @@ For every run (one fresh seed repo per run):
 | `haiku-high` | claude-haiku-5-5 | high |
 | `opus-low` | claude-opus-5-5 | low |
 | `opus-medium` | claude-opus-5-5 | medium |
+| `sonnet-high` | claude-sonnet-5-5 | high |
+| `haiku-low` | claude-haiku-5-5 | low |
 
 The subagents are launched per role with explicit model and effort by the
 pipeline's own router, so the only variable between arms is the model and
@@ -55,7 +57,7 @@ effort of the orchestrating session.
 | Stage | What | Mode | Reps | Runs |
 |---|---|---|---|---|
 | 0 | smoke: preflight and finish line | xs | 1 per arm | headless |
-| 1 | decision gate: a foreign staged file forces a human-decision stop | xs | 1 per arm | interactive |
+| 1 | decision gate: a foreign staged file forces a DECISION stop; the harness itself answers with the same fixed decision for every arm | xs | 1 per arm | headless, multi-turn |
 | 2 | full pipeline: plan, critique, implement, review | m | 3 per arm | headless |
 | 3 | pressure: long run | l | 3 per arm | headless |
 
@@ -118,7 +120,9 @@ finish line. To point it at your own pipeline:
 
 1. Edit `prompt_for()` in `arnes.py` to invoke your command.
 2. Adjust the contract markers in `extraer_run()`: the finish-line regex, and
-   the `DECISION:` / `ERROR:` prefixes.
+   the `DECISION:` / `ERROR:` prefixes. If your pipeline has human-decision
+   stops, set the fixed answer in `ANSWER1` and stage 1 answers them itself
+   over a stream-json multi-turn session.
 3. Review `DOC_RE`, the allowlist of files the orchestrator is allowed to write
    (run documents); anything else its session writes is flagged as a suspected
    role violation.

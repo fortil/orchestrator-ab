@@ -54,6 +54,8 @@ ARMS = {
     # haiku-xhigh prueba si más thinking le sirve al Haiku disciplinado
     "sonnet-high":   {"model": "claude-sonnet-5-5", "effort": "high"},
     "haiku-xhigh":   {"model": "claude-haiku-5-5",  "effort": "xhigh"},
+    # cuarta ola (2026-11-08): cierra la grilla de Sonnet (low/medium/high/xhigh)
+    "sonnet-xhigh":  {"model": "claude-sonnet-5-5", "effort": "xhigh"},
 }
 STAGES = {
     0: {"nombre": "smoke",     "mode": "xs", "brief": "etapa0.md", "reps": 1, "headless": True},

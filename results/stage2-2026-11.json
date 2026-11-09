@@ -1,11 +1,11 @@
 {
  "experiment": "orchestrator-ab stage 2 (full pipeline, MODE=m, 3 reps per arm)",
- "date": "2026-11-06/07",
+ "date": "2026-11-06/09",
  "cli_versions": [
   "2.1.317",
   "2.1.318"
  ],
- "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (all 18 runs valid; the one killed by the weekly limit was re-run after the Nov 8 reset) (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
+ "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (all 24 runs valid; the one killed by the weekly limit was re-run after the Nov 8 reset; sonnet-high and haiku-xhigh added Nov 8-9) (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
  "runs": [
   {
    "run_id": "e2-sonnet-medium-r1",
@@ -579,6 +579,229 @@
    "pico_contexto": 137382,
    "duracion_s": 2104.4,
    "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-high-r1",
+   "brazo": "sonnet-high",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 235,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 1,
+   "sesion_tool_use": {
+    "Bash": 22,
+    "Write": 2
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md"
+   ],
+   "route_lines": 0,
+   "denegados": 1,
+   "tokens": {
+    "in": 92,
+    "cache_r": 5821100,
+    "cache_w": 265071,
+    "out": 27060
+   },
+   "pico_contexto": 144981,
+   "duracion_s": 1300.6,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-high-r2",
+   "brazo": "sonnet-high",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 167,
+   "fin": "COMPLETED",
+   "bypass": true,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 21
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 0,
+   "denegados": 1,
+   "tokens": {
+    "in": 82,
+    "cache_r": 5166128,
+    "cache_w": 265019,
+    "out": 27310
+   },
+   "pico_contexto": 145063,
+   "duracion_s": 1059.6,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-high-r3",
+   "brazo": "sonnet-high",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 150,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 2,
+   "sesion_tool_use": {
+    "Bash": 14
+   },
+   "sesion_writes": [],
+   "writes_sospechosas": [],
+   "route_lines": 1,
+   "denegados": 0,
+   "tokens": {
+    "in": 50,
+    "cache_r": 2977196,
+    "cache_w": 249284,
+    "out": 15676
+   },
+   "pico_contexto": 138758,
+   "duracion_s": 1113.2,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-xhigh-r1",
+   "brazo": "haiku-xhigh",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 452,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 0,
+   "sesion_tool_use": {
+    "Bash": 34,
+    "Read": 5,
+    "Write": 3,
+    "Agent": 1,
+    "Edit": 1
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "COMMIT_MSG.txt"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "COMMIT_MSG.txt"
+   ],
+   "route_lines": 0,
+   "denegados": 1,
+   "tokens": {
+    "in": 152,
+    "cache_r": 11910450,
+    "cache_w": 419348,
+    "out": 135165
+   },
+   "pico_contexto": 204563,
+   "duracion_s": 1962.5,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-xhigh-r2",
+   "brazo": "haiku-xhigh",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 384,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 8,
+   "sesion_tool_use": {
+    "Bash": 28,
+    "Write": 2,
+    "Agent": 1,
+    "Read": 1,
+    "Edit": 4
+   },
+   "sesion_writes": [
+    "BRIEF.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "BRIEF.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md",
+    "RUN_STATE.md"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 140,
+    "cache_r": 10104031,
+    "cache_w": 445404,
+    "out": 99008
+   },
+   "pico_contexto": 174561,
+   "duracion_s": 1594.0,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-haiku-xhigh-r3",
+   "brazo": "haiku-xhigh",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 154,
+   "fin": "COMPLETED. Subcomando `stats` añadido y pruebas en verde (6 passed). Commit `f096b9d` en la rama local `tasky/stats-subcommand`. Sin PR ni push.\n\nUso: `python3",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 1,
+   "sesion_tool_use": {
+    "Bash": 6,
+    "Read": 3,
+    "Skill": 1,
+    "Edit": 2,
+    "Agent": 1
+   },
+   "sesion_writes": [
+    "demo_cli.py",
+    "test_demo_cli.py"
+   ],
+   "writes_sospechosas": [
+    "demo_cli.py",
+    "test_demo_cli.py"
+   ],
+   "route_lines": 0,
+   "denegados": 0,
+   "tokens": {
+    "in": 46,
+    "cache_r": 2728238,
+    "cache_w": 381137,
+    "out": 45220
+   },
+   "pico_contexto": 147435,
+   "duracion_s": 245.0,
+   "bypass_class": "bypass"
   }
  ]
 }

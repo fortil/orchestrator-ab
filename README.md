@@ -47,6 +47,7 @@ For every run (one fresh seed repo per run):
 | `opus-medium` | claude-opus-5-5 | medium |
 | `sonnet-high` | claude-sonnet-5-5 | high |
 | `haiku-xhigh` | claude-haiku-5-5 | xhigh |
+| `sonnet-xhigh` | claude-sonnet-5-5 | xhigh |
 
 The subagents are launched per role with explicit model and effort by the
 pipeline's own router, so the only variable between arms is the model and
@@ -61,7 +62,7 @@ effort of the orchestrating session.
 | 2 | full pipeline: plan, critique, implement, review | m | 3 per arm | headless |
 | 3 | pressure: long run | l | 3 per arm | headless |
 
-## Results from the example run (November 2026, 18 runs)
+## Results from the example run (November 2026, 24 runs)
 
 
 | Arm | Full pipeline | Partial | Bypass | Seat cache read (range) |
@@ -69,6 +70,8 @@ effort of the orchestrating session.
 | `opus-low` | **3/3** | 0 | 0 | 2.4-3.5M tok |
 | `opus-medium` | **3/3** | 0 | 0 | 2.9-4.0M tok |
 | `haiku-high` | 3/3 | 0 | 0 | 7.9-9.7M tok |
+| `sonnet-high` | 3/3 | 0 | 0 | 3.0-5.8M tok |
+| `haiku-xhigh` | 2/3 | 0 | 1 (kept branch+commit, no review docs) | 2.7-11.9M tok |
 | `sonnet-medium` | 2/3 | 0 | 1 (confessed) | 2.4-3.1M tok |
 | `haiku-medium` | 1/3 | 0 | 2 | 1.0-5.1M tok |
 | `sonnet-low` | 1/3 | 1 (no commit) | 1 (no finish line) | 0.6-3.5M tok |
@@ -76,13 +79,16 @@ effort of the orchestrating session.
 Findings:
 
 - **Effort decides discipline more than the model.** At high effort the
-  orchestrator ran the full pipeline every time. At medium, two thirds. At low,
-  one third, and the cheapest arm sometimes skipped the pipeline without
-  emitting its finish line.
+  orchestrator ran the full pipeline every time (Opus, Haiku and Sonnet all
+  went 3/3 there). At medium, two thirds. At low, one third, and the cheapest
+  arm sometimes skipped the pipeline without emitting its finish line.
+- **More thinking did not buy Haiku discipline.** At xhigh it scored 2/3 —
+  below its 3/3 at high — while burning more seat tokens (up to 11.9M vs 9.7M
+  at high). Effort `high` remains Haiku's best measured seat.
 - **The best orchestrator measured was Opus at low effort**: every valid run
   completed the full pipeline, silent and clean, at roughly a third of the seat
-  tokens of the only other fully disciplined arm (Haiku at high). In API
-  dollars that flips: Haiku's cache reads bill at $0.05/MTok versus Opus's
+  tokens of the other fully disciplined arms (Haiku at high, Sonnet at high).
+  In API dollars that flips: Haiku's cache reads bill at $0.05/MTok versus Opus's
   $0.20, so Haiku high's seat came out about three times cheaper per run
   despite the triple token count.
 - **When models bypass the pipeline, they do it differently.** Haiku kept

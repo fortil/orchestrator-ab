@@ -5,7 +5,7 @@
   "2.1.317",
   "2.1.318"
  ],
- "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (all 24 runs valid; the one killed by the weekly limit was re-run after the Nov 8 reset; sonnet-high and haiku-xhigh added Nov 8-9) (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
+ "note": "per-run records with machine paths stripped. linea_final removed for privacy; bypass_class is the manual classification (all 27 runs valid; the one killed by the weekly limit was re-run after the Nov 8 reset; sonnet-high, haiku-xhigh and sonnet-xhigh added Nov 8-9) (the automated bypass flag false-positives when tool results carry no ROUTE lines).",
  "runs": [
   {
    "run_id": "e2-sonnet-medium-r1",
@@ -802,6 +802,122 @@
    "pico_contexto": 147435,
    "duracion_s": 245.0,
    "bypass_class": "bypass"
+  },
+  {
+   "run_id": "e2-sonnet-xhigh-r1",
+   "brazo": "sonnet-xhigh",
+   "etapa": 2,
+   "rep": 1,
+   "eventos": 324,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 5,
+   "sesion_tool_use": {
+    "Bash": 27,
+    "Write": 2,
+    "Agent": 3
+   },
+   "sesion_writes": [
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r1/repo/BRIEF.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r1/repo/RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r1/repo/BRIEF.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r1/repo/RUN_STATE.md"
+   ],
+   "route_lines": 1,
+   "denegados": 3,
+   "tokens": {
+    "in": 122,
+    "cache_r": 8239076,
+    "cache_w": 295986,
+    "out": 50128
+   },
+   "pico_contexto": 159578,
+   "duracion_s": 1190.1,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-xhigh-r2",
+   "brazo": "sonnet-xhigh",
+   "etapa": 2,
+   "rep": 2,
+   "eventos": 340,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 4,
+   "sesion_tool_use": {
+    "Bash": 34,
+    "Write": 2,
+    "Skill": 1
+   },
+   "sesion_writes": [
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r2/repo/BRIEF.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r2/repo/RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r2/repo/BRIEF.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r2/repo/RUN_STATE.md"
+   ],
+   "route_lines": 3,
+   "denegados": 0,
+   "tokens": {
+    "in": 144,
+    "cache_r": 10124585,
+    "cache_w": 323457,
+    "out": 53978
+   },
+   "pico_contexto": 172021,
+   "duracion_s": 1622.7,
+   "bypass_class": "full"
+  },
+  {
+   "run_id": "e2-sonnet-xhigh-r3",
+   "brazo": "sonnet-xhigh",
+   "etapa": 2,
+   "rep": 3,
+   "eventos": 322,
+   "fin": "COMPLETED",
+   "bypass": false,
+   "decisiones": 0,
+   "errores": 0,
+   "errores_sin_respaldo": 0,
+   "narracion": 3,
+   "sesion_tool_use": {
+    "Bash": 28,
+    "Write": 2,
+    "Read": 1,
+    "Edit": 1,
+    "Skill": 1,
+    "Agent": 1
+   },
+   "sesion_writes": [
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r3/repo/BRIEF.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r3/repo/RUN_STATE.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r3/repo/RUN_STATE.md"
+   ],
+   "writes_sospechosas": [
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r3/repo/BRIEF.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r3/repo/RUN_STATE.md",
+    "/Users/william/Develop/own/orquestador-ab/runs/e2-sonnet-xhigh-r3/repo/RUN_STATE.md"
+   ],
+   "route_lines": 1,
+   "denegados": 0,
+   "tokens": {
+    "in": 128,
+    "cache_r": 8668778,
+    "cache_w": 304926,
+    "out": 47905
+   },
+   "pico_contexto": 163453,
+   "duracion_s": 1119.7,
+   "bypass_class": "full"
   }
  ]
 }

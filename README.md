@@ -62,7 +62,7 @@ effort of the orchestrating session.
 | 2 | full pipeline: plan, critique, implement, review | m | 3 per arm | headless |
 | 3 | pressure: long run | l | 3 per arm | headless |
 
-## Results from the example run (November 2026, 24 runs)
+## Results from the example run (November 2026, 27 runs)
 
 
 | Arm | Full pipeline | Partial | Bypass | Seat cache read (range) |
@@ -71,6 +71,7 @@ effort of the orchestrating session.
 | `opus-medium` | **3/3** | 0 | 0 | 2.9-4.0M tok |
 | `haiku-high` | 3/3 | 0 | 0 | 7.9-9.7M tok |
 | `sonnet-high` | 3/3 | 0 | 0 | 3.0-5.8M tok |
+| `sonnet-xhigh` | 3/3 | 0 | 0 | 8.2-10.1M tok |
 | `haiku-xhigh` | 2/3 | 0 | 1 (kept branch+commit, no review docs) | 2.7-11.9M tok |
 | `sonnet-medium` | 2/3 | 0 | 1 (confessed) | 2.4-3.1M tok |
 | `haiku-medium` | 1/3 | 0 | 2 | 1.0-5.1M tok |
@@ -82,9 +83,11 @@ Findings:
   orchestrator ran the full pipeline every time (Opus, Haiku and Sonnet all
   went 3/3 there). At medium, two thirds. At low, one third, and the cheapest
   arm sometimes skipped the pipeline without emitting its finish line.
-- **More thinking did not buy Haiku discipline.** At xhigh it scored 2/3 —
+- **More thinking did not buy a better seat.** At xhigh, Haiku scored 2/3 —
   below its 3/3 at high — while burning more seat tokens (up to 11.9M vs 9.7M
-  at high). Effort `high` remains Haiku's best measured seat.
+  at high). Sonnet held its discipline at xhigh (3/3) but at roughly double
+  the seat tokens of its high arm (8.2-10.1M vs 3.0-5.8M) for the same
+  result. On this task, `high` is the measured sweet spot for both families.
 - **The best orchestrator measured was Opus at low effort**: every valid run
   completed the full pipeline, silent and clean, at roughly a third of the seat
   tokens of the other fully disciplined arms (Haiku at high, Sonnet at high).
